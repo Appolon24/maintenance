@@ -1,0 +1,19 @@
+.form-input {
+    border-radius: 8px;
+    border-width: 0;
+    margin-bottom: 1px !important;
+    padding: 5px 16px;
+    height: 44px;
+    background: #eff0f6;
+}
+.navtab-bg .nav-link {
+    background-color: #f7f7f7;
+    margin: 0 5px;
+}
+.form-textarea {
+    border-radius: 8px;
+    border-width: 0;
+    margin-bottom: 1px !important;
+    padding: 5px 16px;
+    background: #eff0f6;
+}
