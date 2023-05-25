@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\helpers;
 use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -102,6 +103,7 @@ class UserController extends Controller
         $email = $request->email;
         $user = User::where(['email' => $email])->first();
         if (isset($user)){
+            session()->flash('error', "adresse mail deja utilisée");
             //  Toastr::warning(translate('This phone number is already taken'));
             return back();
         }
@@ -117,7 +119,7 @@ class UserController extends Controller
             $piece->user_type = $request->user_type;    //['Admin'=>0, 'Agent'=>1, 'Customer'=>2]
             $piece->save();
         });
-
+        session()->flash('success', "Technicien ajouter avec success!");
         // Toastr::success(translate('Agent Added Successfully!'));
         return back();
     }

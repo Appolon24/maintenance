@@ -12,10 +12,29 @@
                         <form class="form" method="POST" action="{{route('fiche.create',['id'=>$file->demande_depannage_id])}}">
                             {{csrf_field()}}
                             <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label-wrapper">
+                                        <p class="form-label">Niveau de priorite</p>
+                                        <select class="form-select" name="priorite">
+                                            <option value="0">Basic</option>
+                                            <option value="1">Moyen</option>
+                                            <option value="2">Elévé</option>
+                                            <option value="3">Urgence</option>
+
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label-wrapper">
+                                        <p class="form-label">Prix main d'oeuvre</p>
+                                        <input class="form-input"  value="{{$file->maindoeuvre}}" type="text" name="maindoeuvre" placeholder="" required>
+                                        </label>
+                                </div>
                                 <div class="col-md-12">
                                     <label class="form-label-wrapper">
                                         <p class="form-label">Observation</p>
-                                        <textarea class="form-textarea" rows="8" value="{{$file->observation}}" type="text" name="libelle" placeholder="" required>
+                                        <textarea class="form-textarea" rows="8" type="text" name="observation" placeholder="" required>
+                                        {{$file->observation}}
                                         </textarea></label>
                                 </div>
                             </div>

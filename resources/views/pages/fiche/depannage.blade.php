@@ -5,8 +5,8 @@
         <h2 class="main-title">Fiches de depannage</h2>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm"
-                        data-toggle="modal" data-target="#bs-example-modal-sm">
+                <button type="button"  class="btn btn-primary btn-sm"
+                        data-bs-toggle="modal" data-bs-target="#bs-example-modal-sm">
                     <i class="mdi mdi-plus-circle"></i>Ajouter une fiche
                 </button>
 
@@ -22,6 +22,7 @@
                             <th>Machine</th>
                             <th>Technicien</th>
                             <th>Status</th>
+                            <th>Total</th>
                             <th>Observation</th>
                             <th>Action</th>
                         </tr>
@@ -47,26 +48,30 @@
                                 </td>
                                 <td>
                                     @if($agent['isclose'])
-                                        <span class="badge badge-success">terminé</span>
+                                        <span class="badge bg-success">terminé</span>
                                     @else
-                                        <span class="badge badge-pending">encours</span>
+                                        <span class="badge bg-black">encours</span>
                                     @endif
                                 </td>
                                 <td>
-                                    {{$agent['observation']}}
+                                    {{$agent['total']}}<i class="mdi mdi-currency-eur"></i>
+                                </td>
+                                <td>
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{$agent['observation']}}">{{ \Illuminate\Support\Str::limit($agent['observation'],150,'...')}}</span>
+
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn-sm btn-secondary p-1 pr-2 m-1" title="detail"
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-secondary p-1 pr-2 m-1" title="detail"
                                            href="{{route('fiche.edit',[$agent['id']])}}">
                                             <i class="mdi mdi-pencil pl-1" aria-hidden="true"></i>
                                         </a>
-                                        <a class="btn-sm btn-dark p-1 pr-2 m-1" title="Imprimer le pdf"
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-dark p-1 pr-2 m-1" title="Imprimer la fiche de depannage en pdf"
                                            href="{{route('fiche.print',[$agent['id']])}}">
                                             <i class="mdi mdi-file-pdf pl-1" aria-hidden="true"></i>
                                         </a>
                                         <a onclick="getItem({{$agent['id']}})" class="btn-sm btn-danger p-1 pr-2 m-1"
-                                           data-toggle="modal" data-target="#bs-delete-modal-sm">
+                                           data-bs-toggle="modal" data-target="#bs-delete-modal-sm">
                                             <i class="mdi mdi-trash-can pl-1" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -87,7 +92,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="mySmallModalLabel">Liste de demandes</h4>
-                    <button type="button" class="button-error" data-dismiss="modal" aria-label="Close"><i data-feather="delete"></i></button>
+                    <button type="button" class="button-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <table class="table table-bordered">

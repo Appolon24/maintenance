@@ -111,8 +111,8 @@ Route::group(['prefix' => 'demande', 'as' => 'demande.'],function (){
 
     Route::get('/list', [DemandeController::class, 'index'])
         ->name('index');
-    Route::get('/depannage', [DemandeController::class, 'depannage'])
-        ->name('depannage');
+    Route::get('/pending', [DemandeController::class, 'demandepending'])
+        ->name('pending');
     Route::post('/store', [DemandeController::class, 'store'])
         ->name('store');
     Route::delete('/destroy', [DemandeController::class, 'destroy'])

@@ -76,16 +76,27 @@ class FicheController  extends Controller
             $file->observation="";
             $file->save();
         }
+        $lines=LignePieceDepannage::query()->where(['fiche_depannage_id'=>$file->id])->get();
         if ($request->method()=="POST"){
+            $total_piece=0.0;
+            foreach ($lines as $line){
+                $total_piece+=($line->quantite* $line->piece->price_sell);
+            }
             $file->update([
-               'observation'=>$request->get('observation'),
+                'priorite'=>$request->get('priorite'),
+                'status'=>DemandeDepannage::REPARATION,
+                'observation'=>$request->get('observation'),
                 'maindoeuvre'=>$request->get('maindoeuvre'),
-                'totalpiece'=>$request->get('totalpiece'),
-                'total'=>$request->get('total'),
+                'totalpiece'=>$total_piece,
+                'total'=>$request->get('maindoeuvre')+$total_piece,
+            ]);
+            $demande=$file->demande();
+            $demande->update([
+                'priorite'=>$request->get('priorite'),
+                'status'=>DemandeDepannage::REPARATION,
             ]);
         }
         $pieces=PieceDetache::all();
-        $lines=LignePieceDepannage::query()->where(['fiche_depannage_id'=>$file->id])->get();
         return view('pages.fiche.createfiledepannage', compact('file','pieces','lines'));
     }
     public function addpieceline(Request $request){

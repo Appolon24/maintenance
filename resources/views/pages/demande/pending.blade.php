@@ -2,25 +2,20 @@
 
 @section('content')
     <div class="container">
-        <h2 class="main-title">Bons de sortie</h2>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm"
-                        data-toggle="modal" data-target="#bs-example-modal-sm">
-                    <i class="mdi mdi-plus-circle"></i>Ajouter une bon de sortie
-                </button>
+        <h2 class="main-title">Depannages encours</h2>
 
-            </div>
-        </div>
         <div class="white-block">
                 <div class="users-table table-wrapper">
-                    <table class="posts-table"><thead class="thead-light">
+                    <table class="table ">
+                        <thead class="">
                         <tr>
                             <th>#N°</th>
-                            <th>Date </th>
                             <th style="width: 20%">Client</th>
+                            <th>Priorité</th>
                             <th>Machine</th>
+                            <th>Modele</th>
                             <th>Status</th>
+                            <th>Probleme</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -31,27 +26,44 @@
                                 <td>{{$agents->firstitem()+$key}}</td>
                                 <td>
                                     <a href="{{route('piecedetache.edit',[$agent['id']])}}" class="d-block font-size-sm text-body">
-                                        {{$agent['libelle']}}
+                                        {{$agent['user']->name}}
                                     </a>
                                 </td>
                                 <td>
-                                    {{$agent['marque']}}
+                                    <span class="badge bg-dark">{{$agent['priorite']}}</span>
                                 </td>
                                 <td>
-                                    {{$agent['modele']}}
+                                    {{$agent['machine']->libelle}}
                                 </td>
                                 <td>
-                                    {{$agent['quantite']}}
+                                    {{$agent['machine']->model}}
                                 </td>
                                 <td>
-                                    <a class="btn-sm btn-secondary p-1 pr-2 m-1"
-                                       href="{{route('piecedetache.edit',[$agent['id']])}}">
-                                        <i class="mdi mdi-pencil pl-1" aria-hidden="true"></i>
-                                    </a>
-                                    <a onclick="getItem({{$agent['id']}})" class="btn-sm btn-danger p-1 pr-2 m-1"
-                                       data-toggle="modal" data-target="#bs-delete-modal-sm">
-                                        <i class="mdi mdi-trash-can pl-1" aria-hidden="true"></i>
-                                    </a>
+                                    @if($agent['status']==\App\Models\DemandeDepannage::ENVOYE)
+                                        <span class="badge bg-dark">{{$agent['status']}}</span>
+                                    @endif
+                                        @if($agent['status']==\App\Models\DemandeDepannage::REPARATION)
+                                            <span class="badge bg-info">{{$agent['status']}}</span>
+                                        @endif
+                                        @if($agent['status']==\App\Models\DemandeDepannage::COMPLETED)
+                                            <span class="badge bg-success">{{$agent['status']}}</span>
+                                        @endif
+                                </td>
+                                <td id="tooltip-container">
+                                   <span data-bs-toggle="tooltip" data-bs-container="#tooltip-container" data-bs-placement="top" title="{{$agent['description']}}">{{ \Illuminate\Support\Str::limit($agent['description'],150,'...')}}</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a data-bs-toggle="tooltip" data-bs-placement="right" title="Fiche de depannage" class="btn btn-sm btn-secondary"
+                                           href="{{route('fiche.create',[$agent['id']])}}">
+                                            <i class="mdi mdi-file" aria-hidden="true"></i>
+                                        </a>
+                                        <a onclick="getItem({{$agent['id']}})" class="btn btn-sm btn-danger"
+                                           data-toggle="modal" data-target="#bs-delete-modal-sm">
+                                            <i class="mdi mdi-trash-can" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2 class="main-title">Demandes de depannage</h2>
+        <h2 class="main-title">Depannages terminés</h2>
 
         <div class="white-block">
                 <div class="users-table table-wrapper">
@@ -30,9 +30,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    @if($agent['status']==\App\Models\DemandeDepannage::ENVOYE)
-                                        <span class="badge badge-dark">{{$agent['priorite']}}</span>
-                                    @endif
+                                    <span class="badge bg-dark">{{$agent['priorite']}}</span>
                                 </td>
                                 <td>
                                     {{$agent['machine']->libelle}}
@@ -42,17 +40,17 @@
                                 </td>
                                 <td>
                                     @if($agent['status']==\App\Models\DemandeDepannage::ENVOYE)
-                                        <span class="badge badge-dark">{{$agent['status']}}</span>
+                                        <span class="badge bg-dark">{{$agent['status']}}</span>
                                     @endif
-                                        @if($agent['status']==\App\Models\DemandeDepannage::REPARATION)
-                                            <span class="badge badge-info">{{$agent['status']}}</span>
-                                        @endif
-                                        @if($agent['status']==\App\Models\DemandeDepannage::COMPLETED)
-                                            <span class="badge badge-success">{{$agent['status']}}</span>
-                                        @endif
+                                    @if($agent['status']==\App\Models\DemandeDepannage::REPARATION)
+                                        <span class="badge bg-info">{{$agent['status']}}</span>
+                                    @endif
+                                    @if($agent['status']==\App\Models\DemandeDepannage::COMPLETED)
+                                        <span class="badge bg-success">{{$agent['status']}}</span>
+                                    @endif
                                 </td>
                                 <td id="tooltip-container">
-                                   <span data-toggle="tooltip" data-container="#tooltip-container" data-placement="top" title="{{$agent['description']}}">{{ \Illuminate\Support\Str::limit($agent['description'],150,'...')}}</span>
+                                   <span data-bs-toggle="tooltip" data-bs-container="#tooltip-container" data-bs-placement="top" title="{{$agent['description']}}">{{ \Illuminate\Support\Str::limit($agent['description'],150,'...')}}</span>
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -60,10 +58,10 @@
                                            href="{{route('fiche.create',[$agent['id']])}}">
                                             <i class="mdi mdi-file" aria-hidden="true"></i>
                                         </a>
-                                        <a onclick="getItem({{$agent['id']}})" class="btn btn-sm btn-danger"
+                                        {{--<a onclick="getItem({{$agent['id']}})" class="btn btn-sm btn-danger"
                                            data-toggle="modal" data-target="#bs-delete-modal-sm">
                                             <i class="mdi mdi-trash-can" aria-hidden="true"></i>
-                                        </a>
+                                        </a>--}}
                                     </div>
 
                                 </td>
