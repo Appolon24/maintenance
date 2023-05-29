@@ -93,8 +93,10 @@ Route::group(['prefix' => 'fiche', 'as' => 'fiche.'],function (){
         ->name('edit');
     Route::post('/update/{id}', [FicheController::class, 'update'])
         ->name('update');
-    Route::post('/print/{id}', [FicheController::class, 'print'])
-        ->name('print');
+    Route::get('/printdemande/{id}', [FicheController::class, 'printDemande'])
+        ->name('printdemande');
+    Route::get('/printfiche/{id}', [FicheController::class, 'printFiche'])
+        ->name('printfiche');
     Route::get('/list', [FicheController::class, 'index'])
         ->name('index');
     Route::get('/depannage', [FicheController::class, 'depannage'])

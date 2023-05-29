@@ -10,6 +10,7 @@ use App\Models\FicheDepannage;
 use App\Models\FicheSortie;
 use App\Models\LignePieceDepannage;
 use App\Models\PieceDetache;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -184,6 +185,19 @@ class FicheController  extends Controller
         return view('pages.piece.update', compact('piece'));
     }
 
+    public function printFiche($id){
+        $fiche=FicheDepannage::query()->find($id);
+        $pdf = PDF::loadView('pages.fiche.view_pdf_fiche', ['fiche'=>$fiche]);
+        // download PDF file with download method
+       // return $pdf->download('pdf_file.pdf');
+        return $pdf->stream('pdf_file.pdf');
+    }
+    public function printDemande($id){
+        $demande=DemandeDepannage::query()->find($id);
+        $pdf = PDF::loadView('pages.fiche.view_pdf_demande', ['demande'=>$demande]);
+        // download PDF file with download method
+        return $pdf->stream('pdf_file.pdf');
+    }
     /**
      * Update the specified resource in storage.
      */

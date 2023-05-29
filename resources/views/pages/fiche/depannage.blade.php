@@ -66,8 +66,8 @@
                                            href="{{route('fiche.edit',[$agent['id']])}}">
                                             <i class="mdi mdi-pencil pl-1" aria-hidden="true"></i>
                                         </a>
-                                        <a data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-dark p-1 pr-2 m-1" title="Imprimer la fiche de depannage en pdf"
-                                           href="{{route('fiche.print',[$agent['id']])}}">
+                                        <a target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-dark p-1 pr-2 m-1" title="Imprimer la fiche de depannage en pdf"
+                                           href="{{route('fiche.printfiche',[$agent['id']])}}">
                                             <i class="mdi mdi-file-pdf pl-1" aria-hidden="true"></i>
                                         </a>
                                         <a onclick="getItem({{$agent['id']}})" class="btn-sm btn-danger p-1 pr-2 m-1"

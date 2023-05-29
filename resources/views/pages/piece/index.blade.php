@@ -6,7 +6,7 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary btn-sm"
-                        data-toggle="modal" data-target="#bs-example-modal-sm">
+                        data-bs-toggle="modal" data-bs-target="#bs-example-modal-sm">
                     <i class="mdi mdi-plus-circle"></i>Ajouter une piece detaché
                 </button>
 
@@ -74,7 +74,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="mySmallModalLabel">Ajouter une piece</h4>
-                    <button type="button" class="button-error" data-dismiss="modal" aria-label="Close"><i data-feather="delete"></i></button>
+                    <button type="button" class="button-error" data-bs-dismiss="modal" aria-label="Close"><i data-feather="delete"></i></button>
                 </div>
                 <div class="">
                     <form class="form" method="POST" action="{{route('piecedetache.store')}}">
