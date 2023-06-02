@@ -5,12 +5,7 @@
         <h2 class="main-title">Bons de sortie</h2>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm"
-                        data-toggle="modal" data-target="#bs-example-modal-sm">
-                    <i class="mdi mdi-plus-circle"></i>Ajouter une bon de sortie
-                </button>
-
-            </div>
+             </div>
         </div>
         <div class="white-block">
                 <div class="users-table table-wrapper">
@@ -20,7 +15,7 @@
                             <th>Date </th>
                             <th style="width: 20%">Client</th>
                             <th>Machine</th>
-                            <th>Status</th>
+                            <th>Total</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -30,27 +25,23 @@
                             <tr>
                                 <td>{{$agents->firstitem()+$key}}</td>
                                 <td>
-                                    <a href="{{route('piecedetache.edit',[$agent['id']])}}" class="d-block font-size-sm text-body">
-                                        {{$agent['libelle']}}
+                                    <a class="d-block font-size-sm text-body">
+                                        {{$agent['fiche_depannage']->demande->created_at}}
                                     </a>
                                 </td>
                                 <td>
-                                    {{$agent['marque']}}
+                                    {{$agent['fiche_depannage']->demande->user->name}}
                                 </td>
                                 <td>
-                                    {{$agent['modele']}}
+                                    {{$agent['fiche_depannage']->demande->machine->marque}}
                                 </td>
                                 <td>
-                                    {{$agent['quantite']}}
+                                    {{$agent['fiche_depannage']->total}}
                                 </td>
                                 <td>
                                     <a class="btn-sm btn-secondary p-1 pr-2 m-1"
                                        href="{{route('piecedetache.edit',[$agent['id']])}}">
-                                        <i class="mdi mdi-pencil pl-1" aria-hidden="true"></i>
-                                    </a>
-                                    <a onclick="getItem({{$agent['id']}})" class="btn-sm btn-danger p-1 pr-2 m-1"
-                                       data-toggle="modal" data-target="#bs-delete-modal-sm">
-                                        <i class="mdi mdi-trash-can pl-1" aria-hidden="true"></i>
+                                        <i class="mdi mdi-file-pdf pl-1" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -68,7 +59,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="mySmallModalLabel">Ajouter une piece</h4>
-                    <button type="button" class="button-error" data-dismiss="modal" aria-label="Close"><i data-feather="delete"></i></button>
+                    <button type="button" class="button-error" data-bs-dismiss="modal" aria-label="Close"><i data-feather="delete"></i></button>
                 </div>
                 <div class="">
                     <form class="form" method="POST" action="{{route('piecedetache.store')}}">

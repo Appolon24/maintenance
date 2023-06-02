@@ -62,6 +62,10 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-primary p-1 pr-2 m-1" title="Fiche de sortie"
+                                           href="{{route('fiche.createbonsortie',[$agent['id']])}}">
+                                            <i class="mdi mdi-file pl-1" aria-hidden="true"></i>
+                                        </a>
                                         <a data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-secondary p-1 pr-2 m-1" title="detail"
                                            href="{{route('fiche.edit',[$agent['id']])}}">
                                             <i class="mdi mdi-pencil pl-1" aria-hidden="true"></i>

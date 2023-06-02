@@ -100,6 +100,23 @@ class FicheController  extends Controller
         $pieces=PieceDetache::all();
         return view('pages.fiche.createfiledepannage', compact('file','pieces','lines'));
     }
+    public function createbonsortie(Request $request,$id)
+    {
+        $user=auth()->user();
+        $file=FicheSortie::query()->where(['fiche_depannage_id'=>$id])->first();
+        if (is_null($file)){
+            $file=new FicheSortie();
+            $file->fiche_depannage_id=$id;
+            $file->user_id=$user->id;
+            $file->date_sortie=date('Y-m-d');
+            $file->save();
+        }
+        $fiche_depannage=$file->fiche_depannage();
+        $fiche_depannage->update([
+            'isclose'=>true,
+        ]);
+        return view('pages.fiche.createfilesortie', compact('file'));
+    }
     public function addpieceline(Request $request){
         $id=$request->get('item');
         $fiche=$request->get('fiche');
@@ -187,7 +204,8 @@ class FicheController  extends Controller
 
     public function printFiche($id){
         $fiche=FicheDepannage::query()->find($id);
-        $pdf = PDF::loadView('pages.fiche.view_pdf_fiche', ['fiche'=>$fiche]);
+        $lines=LignePieceDepannage::query()->where(['fiche_depannage_id'=>$fiche->id])->get();
+        $pdf = PDF::loadView('pages.fiche.view_pdf_fiche', ['fiche'=>$fiche,'lines'=>$lines]);
         // download PDF file with download method
        // return $pdf->download('pdf_file.pdf');
         return $pdf->stream('pdf_file.pdf');

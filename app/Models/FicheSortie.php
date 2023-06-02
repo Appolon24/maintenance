@@ -9,9 +9,12 @@ class FicheSortie extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'datecreation',
-        'email',
-        'ip',
+        'user_id',
+        'fiche_depannage_id',
+        'date_sortie',
         'status',
     ];
+    public function fiche_depannage() {
+        return $this->belongsTo(FicheDepannage::class, 'fiche_depannage_id', 'id');
+    }
 }

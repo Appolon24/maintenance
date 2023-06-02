@@ -12,17 +12,17 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#home1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 Mes depannages
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#profile1" data-toggle="tab" aria-expanded="true" class="nav-link">
+                            <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
                                 Profile
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#messages1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            <a href="#messages1" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                 Changer mot de passe
                             </a>
                         </li>

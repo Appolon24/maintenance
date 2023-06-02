@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Email Receipt</title>
+    <title>Fiche de depannage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
         /**
@@ -102,12 +102,11 @@
     </style>
 
 </head>
-<body style="background-color: #D2C7BA;">
+<body>
 
 <!-- start preheader -->
 <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-    A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
-</div>
+   </div>
 <!-- end preheader -->
 
 <!-- start body -->
@@ -124,9 +123,10 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td align="left" valign="top" style="padding: 36px 24px;">
-                        <a href="https://sendgrid.com" target="_blank" style="display: inline-block;">
+                        <a href="#" target="_blank" style="display: inline-block;">
                             <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
                         </a>
+                        <h4>Fiche de depannage</h4>
                     </td>
                     <td align="center" valign="top" style="padding: 36px 24px;">
                         <h3>{{env('APP_NAME')}}</h3>
@@ -149,7 +149,7 @@
 
     <!-- start hero -->
     <tr>
-        <td align="center" bgcolor="#D2C7BA">
+        <td align="center">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
                 <tr>
@@ -157,8 +157,54 @@
             <![endif]-->
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
-                    <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 5px solid #69BCB1;">
-                        <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Description</h1>
+                    <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 1px solid #69BCB1;">
+                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Description de la panne</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 36px 24px 24px 24px; font-family: 'Merriweather Bold', serif;">
+                        {{$fiche->demande->description}}
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                <tr>
+                    <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 1px solid #69BCB1;">
+                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Observation</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
+                        {{$fiche->observation}}
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;"  bgcolor="#ffffff">
+                <tr>
+                    <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 1px solid #69BCB1;">
+                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Pieces changés</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
+                       <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                           <thead>
+                           <tr>
+                               <th>#</th>
+                               <th>Libelle</th>
+                               <th>Quantité</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           @foreach($lines as $line)
+                           <tr>
+                               <td></td>
+                               <td>{{$line->piece->libelle}}</td>
+                               <td>{{$line->quantity}}</td>
+                           </tr>
+                           @endforeach
+                           </tbody>
+                       </table>
                     </td>
                 </tr>
             </table>

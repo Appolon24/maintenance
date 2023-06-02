@@ -89,6 +89,8 @@ Route::group(['prefix' => 'piecedetache', 'as' => 'piecedetache.'],function (){
 Route::group(['prefix' => 'fiche', 'as' => 'fiche.'],function (){
     Route::match(array('GET', 'POST'), 'create/{id}', [FicheController::class, 'create'])
         ->name('create');
+    Route::match(array('GET', 'POST'), 'createbonsortie/{id}', [FicheController::class, 'createbonsortie'])
+        ->name('createbonsortie');
     Route::get('/edit/{id}', [FicheController::class, 'edit'])
         ->name('edit');
     Route::post('/update/{id}', [FicheController::class, 'update'])
