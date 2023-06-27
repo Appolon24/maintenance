@@ -203,7 +203,7 @@ class FicheController  extends Controller
     }
 
     public function printFiche($id){
-        $fiche=FicheDepannage::query()->find($id);
+        $fiche=FicheSortie::query()->find($id);
         $lines=LignePieceDepannage::query()->where(['fiche_depannage_id'=>$fiche->id])->get();
         $pdf = PDF::loadView('pages.fiche.view_pdf_fiche', ['fiche'=>$fiche,'lines'=>$lines]);
         // download PDF file with download method
@@ -211,9 +211,9 @@ class FicheController  extends Controller
         return $pdf->stream('pdf_file.pdf');
     }
     public function printDemande($id){
-        $demande=DemandeDepannage::query()->find($id);
-        $pdf = PDF::loadView('pages.fiche.view_pdf_demande', ['demande'=>$demande]);
-        // download PDF file with download method
+        $fiche=FicheDepannage::query()->find($id);
+        $lines=LignePieceDepannage::query()->where(['fiche_depannage_id'=>$fiche->id])->get();
+        $pdf = PDF::loadView('pages.fiche.view_pdf_demande', ['fiche'=>$fiche,'lines'=>$lines]);
         return $pdf->stream('pdf_file.pdf');
     }
     /**

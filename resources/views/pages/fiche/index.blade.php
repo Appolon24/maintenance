@@ -39,8 +39,9 @@
                                     {{$agent['fiche_depannage']->total}}
                                 </td>
                                 <td>
-                                    <a class="btn-sm btn-secondary p-1 pr-2 m-1"
-                                       href="{{route('piecedetache.edit',[$agent['id']])}}">
+                                    <a target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" class="btn-sm btn-dark p-1 pr-2 m-1"
+                                       title="Imprimer le bon de sortie en pdf"
+                                       href="{{route('fiche.printfiche',[$agent['id']])}}">
                                         <i class="mdi mdi-file-pdf pl-1" aria-hidden="true"></i>
                                     </a>
                                 </td>

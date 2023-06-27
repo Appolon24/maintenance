@@ -34,7 +34,7 @@
                     <span class="icon notification active" aria-hidden="true"></span>
                 </button>
                 <ul class="users-item-dropdown notification-dropdown dropdown">
-                    <li>
+                 {{--   <li>
                         <a href="##">
                             <div class="notification-dropdown-icon info">
                                 <i data-feather="check"></i>
@@ -71,7 +71,7 @@
                     </li>
                     <li>
                         <a class="link-to-page" href="##">Go to Notifications page</a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
             <div class="nav-user-wrapper">

@@ -91,7 +91,9 @@
         a {
             color: #CC7953;
         }
-
+        p{
+            font-size: 12px;
+        }
         img {
             height: auto;
             line-height: 100%;
@@ -123,18 +125,15 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td align="left" valign="top" style="padding: 36px 24px;">
-                        <a href="#" target="_blank" style="display: inline-block;">
-                            <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
-                        </a>
-                        <h4>Fiche de depannage</h4>
+                        <h3>{{env('APP_NAME')}}</h3>
+                        <p>Rue des quatre vents 60</p>
+                        <p>1080 Bruxelles</p>
+                        <p>BTW:BE 408.636.875</p>
+                        <p>www.{{env('APP_NAME')}}.com</p>
                     </td>
                     <td align="center" valign="top" style="padding: 36px 24px;">
-                        <h3>{{env('APP_NAME')}}</h3>
-                    </td>
-                    <td align="left" valign="top" style="padding: 36px 24px;">
-                        <p class="h5">Telephone:</p>
-                        <p>Adresse:</p>
-                        <p>BP:</p>
+                        <h4>Bon de sortie N° {{$fiche->id}}</h4>
+                        <h4>Date de sortie {{$fiche->date_sortie}}</h4>
                     </td>
                 </tr>
             </table>
@@ -158,62 +157,85 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 1px solid #69BCB1;">
-                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Description de la panne</h3>
+                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Client</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 36px 24px 24px 24px; font-family: 'Merriweather Bold', serif;">
-                        {{$fiche->demande->description}}
+                    <td style="padding: 6px 24px 0; font-family: 'Merriweather Bold', serif;">
+                       <p>NOM: {{$fiche->fiche_depannage->demande->user->name}}</p>
+                        <p>ADRESSE: {{$fiche->fiche_depannage->demande->user->adresse}}</p>
+                        <p>TELEPHONE: {{$fiche->fiche_depannage->demande->user->phone}}</p>
+                        <p>EMAIL: {{$fiche->fiche_depannage->demande->user->email}}</p>
+                    </td>
+                    <td align="left" valign="top" style="padding: 6px 24px;">
+                        <h5>Machine</h5>
+                        <p>Marque: {{$fiche->fiche_depannage->demande->machine->marque}}</p>
+                        <p>Model: {{$fiche->fiche_depannage->demande->machine->modele}}</p>
                     </td>
                 </tr>
             </table>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 1px solid #69BCB1;">
-                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Observation</h3>
+                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Description de la panne resolue</h3>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
-                        {{$fiche->observation}}
+                        {{$fiche->fiche_depannage->observation}}
                     </td>
                 </tr>
             </table>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;"  bgcolor="#ffffff">
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 1px solid #69BCB1;">
-                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Pieces changés</h3>
+                        <h3 style="margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -1px; line-height: 25px;">Facturation</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
-                       <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                    <td  align="left" style="text-align:left;padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
+                       <table  align="left" border="0" cellpadding="1" cellspacing="2" width="100%" style="max-width: 600px;">
                            <thead>
-                           <tr>
-                               <th>#</th>
+                           <tr  align="left">
                                <th>Libelle</th>
+                               <th>Prix</th>
                                <th>Quantité</th>
+                               <th>Total</th>
                            </tr>
                            </thead>
                            <tbody>
-                           @foreach($lines as $line)
                            <tr>
-                               <td></td>
-                               <td>{{$line->piece->libelle}}</td>
-                               <td>{{$line->quantity}}</td>
+                               <td>Mains deouvre</td>
+                               <td>{{$fiche->fiche_depannage->maindoeuvre}}</td>
+                               <td>01</td>
+                               <td>{{$fiche->fiche_depannage->maindoeuvre}}</td>
                            </tr>
-                           @endforeach
+                           <tr>
+                               <td>Pieces</td>
+                               <td>{{$fiche->fiche_depannage->totalpiece}}</td>
+                               <td>-</td>
+                               <td>{{$fiche->fiche_depannage->totalpiece}}</td>
+                           </tr>
                            </tbody>
                        </table>
                     </td>
                 </tr>
             </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                <tr>
+                    <td  align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
+                        Signature du Client</td>
+                    <td  align="right" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif;">
+                        Signature du technicien</td>
+                </tr>
+            </table>
+
             <!--[if (gte mso 9)|(IE)]>
             </td>
             </tr>
             </table>
             <![endif]-->
-        </td>
+
     </tr>
     <!-- end hero -->
 

@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
+            <div class=" mt-3">
                 <div class="btn-group">
                 <a class="btn btn-warning" href="{{route('fiche.index')}}"><i class="mdi mdi-arrow-left"></i> retour</a>
                 <a class="btn btn-dark"><i class="mdi mdi-file-pdf"></i> Imprimer</a>
